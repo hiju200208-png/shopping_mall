@@ -240,7 +240,6 @@ export const products: Product[] = [
     manufacturer: '써니힐즈 (SunnyHills, 微熱山丘)',
     storageMethod: '직사광선을 피해 서늘하고 건조한 곳에 보관, 개봉 후 빠른 시일 내 섭취',
   },
-
   {
     id: 12,
     name: '왕왕 쌀과자 센베이',
@@ -263,7 +262,6 @@ export const products: Product[] = [
     manufacturer: '이란식품공업 (旺旺 Want Want, 宜蘭食品工業)',
     storageMethod: '직사광선을 피해 서늘하고 건조한 곳에 보관, 개봉 후 밀봉',
   },
-
   {
     id: 13,
     name: '꽈이꽈이 오향맛 4입',
@@ -285,7 +283,6 @@ export const products: Product[] = [
     manufacturer: '꽈이꽈이 (乖乖股份有限公司)',
     storageMethod: '직사광선을 피해 서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 14,
     name: '타이중 태양당 태양병 12입',
@@ -307,7 +304,6 @@ export const products: Product[] = [
     manufacturer: '태양당노점 (太陽堂老店)',
     storageMethod: '직사광선을 피해 서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 15,
     name: '슈가앤스파이스 프렌치 누가',
@@ -330,7 +326,6 @@ export const products: Product[] = [
     manufacturer: '슈가앤스파이스 (糖村 Sugar & Spice)',
     storageMethod: '직사광선을 피해 서늘한 곳에 보관, 고온에서 녹을 수 있으니 여름철 냉장 보관',
   },
-
   {
     id: 16,
     name: '장쥔야 라면볼 꼬치구이맛',
@@ -353,7 +348,6 @@ export const products: Product[] = [
     manufacturer: '웨이리식품 (維力食品工業)',
     storageMethod: '직사광선을 피해 서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 17,
     name: '황르샹 간장조림 두부간식',
@@ -375,7 +369,6 @@ export const products: Product[] = [
     manufacturer: '황르샹 (黃日香)',
     storageMethod: '0~10℃ 냉장 보관, 개봉 후 빠른 시일 내 섭취',
   },
-
   {
     id: 18,
     name: '셴마이 타로 페이스트리 9입',
@@ -397,7 +390,6 @@ export const products: Product[] = [
     manufacturer: '셴마이식품 (先麥食品)',
     storageMethod: '직사광선을 피해 서늘하고 건조한 곳에 보관, 개봉 후 빠른 시일 내 섭취',
   },
-
   {
     id: 19,
     name: '신동양 꿀 돼지고기 육포',
@@ -419,7 +411,6 @@ export const products: Product[] = [
     manufacturer: '신동양 (新東陽)',
     storageMethod: '직사광선을 피해 서늘한 곳에 보관, 개봉 후 냉장 보관',
   },
-
   {
     id: 20,
     name: '미야 이란 우설병 꿀참깨맛',
@@ -467,7 +458,7 @@ export const products: Product[] = [
     manufacturer: '차차식품(洽洽食品)',
     storageMethod: '직사광선과 습기를 피해 서늘한 곳에 보관, 개봉 후 밀봉하여 보관',
   },
-{
+  {
     id: 22,
     name: '비첸향 슬라이스포크 280g',
     price: 35500,
@@ -515,7 +506,7 @@ export const products: Product[] = [
     manufacturer: '다오샹춘(稻香村)',
     storageMethod: '직사광선과 고온다습한 곳을 피해 서늘한 곳에 보관',
   },
-    {
+  {
     id: 24,
     name: '구이파샹 통조림 튀김 만두 150g 캔',
     price: 19900,
@@ -635,7 +626,7 @@ export const products: Product[] = [
     manufacturer: '확인 필요',
     storageMethod: '직사광선과 습기를 피해 서늘한 곳에 보관, 개봉 후 밀봉하여 보관',
   },
-    {
+  {
     id: 29,
     name: '펑마이 지단고 계란 카스테라',
     price: 6000,
@@ -705,7 +696,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '직사광선과 고온다습한 곳을 피해 서늘한 곳에 보관',
   },
-
   {
     id: 32,
     name: 'Marou 코코넛 밀크 & 팝드라이스 초콜릿 53%',
@@ -729,7 +719,6 @@ export const products: Product[] = [
     manufacturer: 'Maison Marou',
     storageMethod: '18~25℃의 건조하고 서늘한 곳에 보관',
   },
-
   {
     id: 33,
     name: '께오 꾸 더 땅콩 라이스페이퍼',
@@ -752,7 +741,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '습기를 피해 밀봉하여 서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 34,
     name: '란추 솔티드 에그 칩',
@@ -775,7 +763,6 @@ export const products: Product[] = [
     manufacturer: 'Ranchu',
     storageMethod: '직사광선을 피해 서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 35,
     name: '후에 메쑹 참깨 캔디',
@@ -798,7 +785,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '고온다습한 곳과 직사광선을 피해 보관',
   },
-
   {
     id: 36,
     name: '베트남 돼지고기 육포 크리스피 라이스',
@@ -821,7 +807,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '개봉 후 밀봉하여 서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 37,
     name: '베트남 생강 정과',
@@ -844,7 +829,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '밀봉하여 습기와 직사광선을 피해 보관',
   },
-
   {
     id: 38,
     name: '하노이 오마이 말린 과일',
@@ -867,7 +851,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '밀봉하여 서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 39,
     name: '베트남 코코넛 칩',
@@ -890,7 +873,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '습기가 들어가지 않도록 밀봉하여 보관',
   },
-
   {
     id: 40,
     name: '하노이 반꼼 녹미 케이크',
@@ -917,7 +899,6 @@ export const products: Product[] = [
   // =========================================================
   // 🇺🇸 미국 : ID 41 ~ 50
   // =========================================================
-
   {
     id: 41,
     name: 'OREO 오리지널',
@@ -940,7 +921,6 @@ export const products: Product[] = [
     manufacturer: 'Mondelēz Global LLC',
     storageMethod: '서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 42,
     name: "REESE'S 밀크 초콜릿 피넛버터 컵",
@@ -963,7 +943,6 @@ export const products: Product[] = [
     manufacturer: 'The Hershey Company',
     storageMethod: '고온과 직사광선을 피해 서늘한 곳에 보관',
   },
-
   {
     id: 43,
     name: 'Doritos 나초 치즈',
@@ -986,7 +965,6 @@ export const products: Product[] = [
     manufacturer: 'Frito-Lay',
     storageMethod: '직사광선을 피해 서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 44,
     name: 'Cheetos Crunchy 치즈',
@@ -1009,7 +987,6 @@ export const products: Product[] = [
     manufacturer: 'Frito-Lay',
     storageMethod: '서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 45,
     name: "M&M'S 밀크 초콜릿",
@@ -1032,7 +1009,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '고온과 직사광선을 피해 서늘한 곳에 보관',
   },
-
   {
     id: 46,
     name: 'Pringles 오리지널',
@@ -1055,7 +1031,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '서늘하고 건조한 곳에 보관하고 개봉 후 밀봉',
   },
-
   {
     id: 47,
     name: 'Pop-Tarts 프로스티드 스트로베리',
@@ -1078,7 +1053,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '서늘하고 건조한 실온에 보관',
   },
-
   {
     id: 48,
     name: 'Cheez-It 오리지널',
@@ -1101,7 +1075,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '습기를 피해 서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 49,
     name: 'Chips Ahoy! 오리지널 초콜릿칩 쿠키',
@@ -1124,7 +1097,6 @@ export const products: Product[] = [
     manufacturer: 'Mondelēz Global LLC',
     storageMethod: '서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 50,
     name: 'Hostess Twinkies 오리지널',
@@ -1151,7 +1123,6 @@ export const products: Product[] = [
   // =========================================================
   // 🇫🇷 프랑스 : ID 51 ~ 60
   // =========================================================
-
   {
     id: 51,
     name: 'LU Véritable Petit Beurre',
@@ -1174,7 +1145,6 @@ export const products: Product[] = [
     manufacturer: 'Mondelēz France',
     storageMethod: '서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 52,
     name: 'St Michel 갈레트 오 뵈르',
@@ -1197,7 +1167,6 @@ export const products: Product[] = [
     manufacturer: 'St Michel',
     storageMethod: '서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 53,
     name: 'St Michel 라 마들렌',
@@ -1220,7 +1189,6 @@ export const products: Product[] = [
     manufacturer: 'St Michel',
     storageMethod: '직사광선을 피해 서늘하고 건조한 곳에 보관',
   },
-
   {
     id: 54,
     name: 'Bonne Maman 쁘띠 마들렌 퓨어 버터',
@@ -1243,7 +1211,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '건조하고 열과 빛을 피해 보관',
   },
-
   {
     id: 55,
     name: 'LU Petit Écolier 다크 초콜릿',
@@ -1266,7 +1233,6 @@ export const products: Product[] = [
     manufacturer: 'Mondelēz France',
     storageMethod: '열과 직사광선을 피해 서늘한 곳에 보관',
   },
-
   {
     id: 56,
     name: 'Gavottes 오리지널 크레프 덴텔',
@@ -1289,7 +1255,6 @@ export const products: Product[] = [
     manufacturer: '',
     storageMethod: '서늘하고 건조한 곳에 보관하고 개봉 후 밀폐 보관',
   },
-
   {
     id: 57,
     name: 'Carambar Caramel 오리지널',
@@ -1312,7 +1277,6 @@ export const products: Product[] = [
     manufacturer: 'Carambar & Co',
     storageMethod: '고온과 습기를 피해 서늘한 곳에 보관',
   },
-
   {
     id: 58,
     name: 'HARIBO Tagada 딸기 캔디',
@@ -1335,7 +1299,6 @@ export const products: Product[] = [
     manufacturer: 'HARIBO',
     storageMethod: '열과 습기를 피해 보관',
   },
-
   {
     id: 59,
     name: "HARIBO Dragibus L'Original",
@@ -1358,7 +1321,6 @@ export const products: Product[] = [
     manufacturer: 'HARIBO',
     storageMethod: '열과 습기를 피해 보관',
   },
-
   {
     id: 60,
     name: 'LU Palmito 팔미에',
