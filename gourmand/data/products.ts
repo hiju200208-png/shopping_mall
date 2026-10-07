@@ -1,5 +1,6 @@
 import { Product } from '@/types/product';
 
+// 상품 데이터
 export const products: Product[] = [
   {
     id: 1,
