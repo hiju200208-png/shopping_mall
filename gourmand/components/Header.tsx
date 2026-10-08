@@ -17,7 +17,7 @@ export default function Header() {
       <div className="mx-auto hidden h-20 max-w-6xl items-center gap-8 px-4 lg:flex">
         {/* 1. 로고 (클릭하면 메인으로) */}
         <Link href="/" className="shrink-0">
-          <img src="/images/common/logo.png" alt="구르망 GOURMAND" className="h-14 w-auto" />
+          <img src="/images/common/logo.png" alt="구르망 GOURMAND" className="h-25 w-auto" />
         </Link>
 
         {/* 2. 국가 메뉴 */}
