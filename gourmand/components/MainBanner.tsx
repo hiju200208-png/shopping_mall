@@ -8,28 +8,23 @@ import Image from "next/image";
 const banners = [
   {
     id: 1,
-    country: "일본",
-    image: "/images/common/banner-japan.png",
+    country: "희주 PICK",
+    image: "/images/common/banner_heeju.png",
   },
   {
     id: 2,
-    country: "대만",
-    image: "/images/common/banner-taiwan.png",
+    country: "예주 PICK",
+    image: "/images/common/banner_yeju.png",
   },
   {
     id: 3,
-    country: "중국",
-    image: "/images/common/banner-china.png",
+    country: "종복 PICK",
+    image: "/images/common/banner_jongbok.png",
   },
   {
     id: 4,
-    country: "베트남",
-    image: "/images/common/banner-vietnam.png",
-  },
-  {
-    id: 5,
-    country: "세계과자",
-    image: "/images/common/banner-global.png",
+    country: "강 PICK",
+    image: "/images/common/banner_gang.png",
   },
 ];
 
@@ -69,7 +64,7 @@ export default function MainBanner() {
       className="w-full py-6"
     >
       <div
-        className="group relative h-[180px] overflow-hidden rounded-2xl bg-rose-50 shadow-md sm:h-[240px] lg:h-[300px]"
+        className="group relative h-[180px] overflow-hidden rounded-2xl bg-rose-50 shadow-md sm:h-[240px] lg:h-[600px]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onFocusCapture={() => setIsPaused(true)}
