@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { products } from '@/data/products';
 import { Product } from '@/types/product';
+import CountryMenu from '@/components/CountryMenu';
 
 // 라벨 + 값 한 줄
 function InfoRow({ label, value }: { label: string; value: string | number }) {
@@ -84,8 +85,12 @@ function ProductInfoCard({ p }: { p: Product }) {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gray-50 p-8">
-      <h1 className="mb-6 text-2xl font-bold">상품 데이터 확인 ({products.length}개)</h1>
+    <main className="mx-auto max-w-6xl px-4 py-6 md:py-8">
+      {/* 1. 나라별 바로가기 아이콘 */}
+      <CountryMenu />
+
+      {/* 2. 상품 목록 (인기 상품 영역은 담당 팀원 작업 예정) */}
+      <h1 className="mb-6 mt-12 text-2xl font-bold">상품 데이터 확인 ({products.length}개)</h1>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {products.map((p) => (
           <ProductInfoCard key={p.id} p={p} />
