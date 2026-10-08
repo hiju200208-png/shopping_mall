@@ -439,7 +439,7 @@ export const products: Product[] = [
     price: 8040,
     country: '중국',
     category: '견과류',
-    imageUrl: './images/china/21.jpg',
+    imageUrl: '/images/china/21.jpg',
     description: '팔각, 계피 등 향신료와 함께 삶아 볶은 중국 국민 간식 해바라기씨',
     isNew: true,
 
