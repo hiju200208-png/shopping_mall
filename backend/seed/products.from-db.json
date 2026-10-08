@@ -1,7 +1,4 @@
-import { Product } from '@/types/product';
-
-// PostgreSQL gourmand 스키마에서 생성한 상품 데이터
-export const products: Product[] = [
+[
   {
     "id": 1,
     "name": "쟈가리코 샐러드맛",
@@ -1329,4 +1326,4 @@ export const products: Product[] = [
     "manufacturer": "Mondelēz France",
     "storageMethod": "서늘하고 건조한 곳에 보관"
   }
-];
+]
