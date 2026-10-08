@@ -3,6 +3,7 @@ import Image from "next/image";
 import { products } from '@/data/products';
 import { Product } from '@/types/product';
 import CountryMenu from '@/components/CountryMenu';
+import ProductCard from '@/components/ProductCard';
 
 // 라벨 + 값 한 줄
 function InfoRow({ label, value }: { label: string; value: string | number }) {
@@ -91,9 +92,9 @@ export default function Home() {
 
       {/* 2. 상품 목록 (인기 상품 영역은 담당 팀원 작업 예정) */}
       <h1 className="mb-6 mt-12 text-2xl font-bold">상품 데이터 확인 ({products.length}개)</h1>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
         {products.map((p) => (
-          <ProductInfoCard key={p.id} p={p} />
+          <ProductCard key={p.id} p={p} />
         ))}
       </div>
     </main>
