@@ -29,8 +29,8 @@ export default function CountryMenu() {
           </span>
 
           {/* 국가 이름 */}
-          <span className="text-xs font-medium text-gray-700 md:text-sm">
-            {c.name}
+          <span className="text-[15px] font-medium">
+              {c.name}
           </span>
         </Link>
       ))}

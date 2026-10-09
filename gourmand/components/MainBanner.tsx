@@ -1,46 +1,41 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-// 국가별 배너 이미지
 const banners = [
   {
     id: 1,
     country: "희주 PICK",
     image: "/images/common/banner_heeju.png",
-    href: "/pick/heeju" 
+    href: "/pick/heeju",
   },
   {
     id: 2,
     country: "예주 PICK",
     image: "/images/common/banner_yeju.png",
-    href: "/pick/yeju" 
+    href: "/pick/yeju",
   },
   {
     id: 3,
     country: "종복 PICK",
     image: "/images/common/banner_jongbok.png",
-    href: "/pick/jongbok"
+    href: "/pick/jongbok",
   },
   {
     id: 4,
     country: "강 PICK",
     image: "/images/common/banner_gang.png",
-    href: "/pick/gang"
+    href: "/pick/gang",
   },
 ];
 
 export default function MainBanner() {
-  // 현재 표시 중인 배너
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  // 마우스를 올리면 자동 전환 중지
   const [isPaused, setIsPaused] = useState(false);
 
-  // 5초마다 자동 전환
+  // 마우스를 올리거나 키보드로 선택하면 자동 전환 중지
   useEffect(() => {
     if (isPaused) return;
 
@@ -51,12 +46,10 @@ export default function MainBanner() {
     return () => clearInterval(timer);
   }, [isPaused, currentIndex]);
 
-  // 다음 배너
   const nextBanner = () => {
     setCurrentIndex((prev) => (prev + 1) % banners.length);
   };
 
-  // 이전 배너
   const prevBanner = () => {
     setCurrentIndex(
       (prev) => (prev - 1 + banners.length) % banners.length
@@ -69,13 +62,12 @@ export default function MainBanner() {
       className="w-full py-6"
     >
       <div
-        className="group relative h-[180px] overflow-hidden rounded-2xl bg-rose-50 shadow-md sm:h-[240px] lg:h-[600px]"
+        className="group relative h-[180px] overflow-hidden rounded-2xl bg-rose-50 shadow-md sm:h-[240px] lg:h-[520px]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onFocusCapture={() => setIsPaused(true)}
         onBlurCapture={() => setIsPaused(false)}
       >
-
         {/* 배너 이미지 */}
         {banners.map((banner, index) => (
           <div
@@ -93,7 +85,7 @@ export default function MainBanner() {
                 alt={`${banner.country} 과자 여행 배너`}
                 fill
                 sizes="(max-width: 768px) 100vw, 1152px"
-                className="object-cover object-center"
+                className="object-cover object-center lg:object-top"
                 priority={index === 0}
               />
             </Link>
@@ -122,7 +114,6 @@ export default function MainBanner() {
 
         {/* 하단 페이지 표시 */}
         <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/25 px-3 py-2">
-
           {banners.map((banner, index) => (
             <button
               key={banner.id}
@@ -139,7 +130,6 @@ export default function MainBanner() {
               }`}
             />
           ))}
-
         </div>
       </div>
     </section>
