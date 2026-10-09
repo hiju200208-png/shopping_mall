@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 // 국가별 배너 이미지
 const banners = [
@@ -10,21 +11,25 @@ const banners = [
     id: 1,
     country: "희주 PICK",
     image: "/images/common/banner_heeju.png",
+    href: "/pick/heeju" 
   },
   {
     id: 2,
     country: "예주 PICK",
     image: "/images/common/banner_yeju.png",
+    href: "/pick/yeju" 
   },
   {
     id: 3,
     country: "종복 PICK",
     image: "/images/common/banner_jongbok.png",
+    href: "/pick/jongbok"
   },
   {
     id: 4,
     country: "강 PICK",
     image: "/images/common/banner_gang.png",
+    href: "/pick/gang"
   },
 ];
 
@@ -82,14 +87,16 @@ export default function MainBanner() {
                 : "pointer-events-none z-0 opacity-0"
             }`}
           >
-            <Image
-              src={banner.image}
-              alt={`${banner.country} 과자 여행 배너`}
-              fill
-              sizes="(max-width: 768px) 100vw, 1152px"
-              className="object-cover object-center"
-              priority={index === 0}
-            />
+            <Link href={banner.href} className="absolute inset-0 block">
+              <Image
+                src={banner.image}
+                alt={`${banner.country} 과자 여행 배너`}
+                fill
+                sizes="(max-width: 768px) 100vw, 1152px"
+                className="object-cover object-center"
+                priority={index === 0}
+              />
+            </Link>
           </div>
         ))}
 
