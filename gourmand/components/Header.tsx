@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import CartBadge from "@/components/CartBadge";
 
 const countries = [
   { name: "일본", slug: "japan" },
@@ -101,11 +102,14 @@ export default function Header() {
             href="/cart"
             className="flex flex-col items-center gap-1 text-[13px] font-medium text-gray-700 transition hover:text-blue-900"
           >
-            <img
-              src="/images/common/cart_icon.png"
-              alt=""
-              className="h-7 w-7"
-            />
+            <span className="relative">
+              <img
+                src="/images/common/cart_icon.png"
+                alt=""
+                className="h-7 w-7"
+              />
+              <CartBadge />
+            </span>
             <span>장바구니</span>
           </Link>
 
@@ -177,11 +181,14 @@ export default function Header() {
             aria-label="장바구니"
             className="p-2"
           >
-            <img
-              src="/images/common/cart_icon.png"
-              alt=""
-              className="h-6 w-6"
-            />
+            <span className="relative block">
+              <img
+                src="/images/common/cart_icon.png"
+                alt=""
+                className="h-6 w-6"
+              />
+              <CartBadge />
+            </span>
           </Link>
         </div>
       </div>
