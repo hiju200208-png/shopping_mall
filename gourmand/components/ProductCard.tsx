@@ -15,32 +15,43 @@ export default function ProductCard({ p }: { p: Product }) {
   const ratingPercent = Math.max(0, Math.min(100, (p.rating / 5) * 100));
 
   return (
-    <div>
-      {/* 상세 페이지 경로는 팀에서 정한 라우트에 맞게 href만 바꾸세요 */}
-      <Link href={`/products/${p.id}`} className="group block">
-        {/* 이미지 */}
-        <div className="relative aspect-square overflow-hidden rounded-xl border border-gray-200 bg-white">
-          <img
-            src={p.imageUrl}
-            alt={p.name}
-            className="h-full w-full object-contain p-3 transition duration-300 group-hover:scale-105"
-          />
+    <div className="group">
+      {/* 이미지 + 장바구니 버튼 (버튼은 링크 밖에 두어 눌러도 상세로 이동하지 않음) */}
+      <div className="relative">
+        {/* 상세 페이지 경로는 팀에서 정한 라우트에 맞게 href만 바꾸세요 */}
+        <Link
+          href={`/products/${p.id}`}
+          tabIndex={-1}
+          aria-hidden="true"
+          className="block"
+        >
+          <div className="relative aspect-square overflow-hidden rounded-xl border border-gray-200 bg-white">
+            <img
+              src={p.imageUrl}
+              alt={p.name}
+              className="h-full w-full object-contain transition duration-300 group-hover:scale-105"
+            />
 
-          {p.isNew && (
-            <span className="absolute left-2 top-2 rounded bg-[#12306b] px-2 py-0.5 text-[11px] font-bold text-white">
-              NEW
-            </span>
-          )}
-
-          {soldOut && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white/70">
-              <span className="rounded-full bg-gray-800 px-4 py-1.5 text-sm font-bold text-white">
-                품절
+            {p.isNew && (
+              <span className="absolute left-2 top-2 rounded bg-brand px-2 py-0.5 text-[11px] font-bold text-white">
+                NEW
               </span>
-            </div>
-          )}
-        </div>
+            )}
 
+            {soldOut && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white/70">
+                <span className="rounded-full bg-gray-800 px-4 py-1.5 text-sm font-bold text-white">
+                  품절
+                </span>
+              </div>
+            )}
+          </div>
+        </Link>
+
+        <AddToCartButton p={p} />
+      </div>
+
+      <Link href={`/products/${p.id}`} className="block">
         {/* 정보 */}
         <div className="mt-3 px-1">
           {/* 이름: 한 줄까지, 넘치면 ... */}
@@ -56,7 +67,7 @@ export default function ProductCard({ p }: { p: Product }) {
           <div className="mt-1 flex flex-wrap items-baseline gap-x-1.5">
             {hasDiscount ? (
               <>
-                <span className="text-[15px] font-bold text-red-500">{discountRate}%</span>
+                <span className="text-[15px] font-bold text-accent">{discountRate}%</span>
                 <span className="text-lg font-bold text-gray-900">
                   {salePrice?.toLocaleString()}원
                 </span>
@@ -91,9 +102,6 @@ export default function ProductCard({ p }: { p: Product }) {
           </div>
         </div>
       </Link>
-
-      {/* 장바구니 담기 */}
-      <AddToCartButton p={p} />
     </div>
   );
 }

@@ -58,7 +58,7 @@ export default function MobileTabBar() {
             key={tab.label}
             href={tab.href}
             className={`flex flex-1 flex-col items-center justify-center gap-1 text-[11px] ${
-              isActive ? 'font-bold text-blue-900' : 'text-gray-500'
+              isActive ? 'font-bold text-brand' : 'text-gray-500'
             }`}
           >
             {tab.icon}

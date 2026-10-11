@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { usePathname } from "next/navigation";
 import CartBadge from "@/components/CartBadge";
 
 const countries = [
@@ -36,7 +37,7 @@ function SearchBox({ autoFocus = false }: { autoFocus?: boolean }) {
     <form
       action="/products"
       role="search"
-      className="flex h-11 w-full items-center rounded-full border border-blue-100 bg-blue-50/60 pl-4 pr-1 transition focus-within:border-blue-300 focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-100"
+      className="flex h-11 w-full items-center rounded-full border border-brand-line bg-brand-soft pl-4 pr-1 transition focus-within:border-brand focus-within:bg-white focus-within:ring-2 focus-within:ring-brand-soft"
     >
       <input
         type="search"
@@ -50,12 +51,58 @@ function SearchBox({ autoFocus = false }: { autoFocus?: boolean }) {
       <button
         type="submit"
         aria-label="검색"
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-blue-900 shadow-sm transition hover:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-brand shadow-sm transition hover:bg-brand-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
       >
         <SearchIcon />
       </button>
     </form>
   );
+}
+
+// 나라 메뉴 링크 (PC 가로 메뉴 / 모바일 펼침 메뉴 공통)
+function CountryLinks({
+  current,
+  mobile = false,
+  onNavigate,
+}: {
+  current: string | null; // 지금 보고 있는 나라 slug (모르면 null)
+  mobile?: boolean;
+  onNavigate?: () => void;
+}) {
+  return (
+    <>
+      {countries.map((country) => {
+        const active = current === country.slug;
+        const style = mobile
+          ? `block border-b border-gray-50 px-5 py-3 font-medium ${
+              active ? "bg-brand-soft font-bold text-brand" : "text-gray-700"
+            }`
+          : `border-b-2 py-1 text-[17px] font-semibold transition hover:text-brand ${
+              active ? "border-brand text-brand" : "border-transparent text-gray-700"
+            }`;
+        return (
+          <Link
+            key={country.slug}
+            href={`/country/${country.slug}`}
+            onClick={onNavigate}
+            aria-current={active ? "page" : undefined}
+            className={style}
+          >
+            {country.name}
+          </Link>
+        );
+      })}
+    </>
+  );
+}
+
+// 현재 주소를 읽어서 강조 (주소는 접속 시점에만 알 수 있어 Suspense 안에서만 사용)
+function ActiveCountryLinks(props: { mobile?: boolean; onNavigate?: () => void }) {
+  const pathname = usePathname();
+  const current = pathname.startsWith("/country/")
+    ? pathname.split("/")[2]
+    : null;
+  return <CountryLinks current={current} {...props} />;
 }
 
 export default function Header() {
@@ -80,15 +127,10 @@ export default function Header() {
           aria-label="국가별 상품"
           className="flex shrink-0 items-center gap-4 whitespace-nowrap xl:gap-6"
         >
-          {countries.map((country) => (
-            <Link
-              key={country.slug}
-              href={`/country/${country.slug}`}
-              className="text-[17px] font-semibold text-gray-700 transition hover:text-blue-900"
-            >
-              {country.name}
-            </Link>
-          ))}
+          {/* 미리 만들어 둔 화면에는 강조 없이, 접속 후 현재 나라를 강조 */}
+          <Suspense fallback={<CountryLinks current={null} />}>
+            <ActiveCountryLinks />
+          </Suspense>
         </nav>
 
         {/* 검색창 */}
@@ -100,7 +142,7 @@ export default function Header() {
         <div className="flex shrink-0 items-center gap-5 whitespace-nowrap">
           <Link
             href="/cart"
-            className="flex flex-col items-center gap-1 text-[13px] font-medium text-gray-700 transition hover:text-blue-900"
+            className="flex flex-col items-center gap-1 text-[13px] font-medium text-gray-700 transition hover:text-brand"
           >
             <span className="relative">
               <img
@@ -115,7 +157,7 @@ export default function Header() {
 
           <Link
             href="/mypage"
-            className="flex flex-col items-center gap-1 text-[13px] font-medium text-gray-700 transition hover:text-blue-900"
+            className="flex flex-col items-center gap-1 text-[13px] font-medium text-gray-700 transition hover:text-brand"
           >
             <img
               src="/images/common/my_page_icon.png"
@@ -206,16 +248,13 @@ export default function Header() {
           aria-label="국가별 상품"
           className="border-t border-gray-100 lg:hidden"
         >
-          {countries.map((country) => (
-            <Link
-              key={country.slug}
-              href={`/country/${country.slug}`}
-              onClick={() => setMenuOpen(false)}
-              className="block border-b border-gray-50 px-5 py-3 font-medium text-gray-700"
-            >
-              {country.name}
-            </Link>
-          ))}
+          <Suspense
+            fallback={
+              <CountryLinks current={null} mobile onNavigate={() => setMenuOpen(false)} />
+            }
+          >
+            <ActiveCountryLinks mobile onNavigate={() => setMenuOpen(false)} />
+          </Suspense>
         </nav>
       )}
     </header>
