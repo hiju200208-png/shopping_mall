@@ -25,7 +25,7 @@ export default function CartView() {
         <p className="text-gray-600">장바구니가 비어 있어요.</p>
         <Link
           href="/"
-          className="mt-4 inline-block rounded-lg bg-[#12306b] px-5 py-2.5 text-sm font-semibold text-white"
+          className="mt-4 inline-block rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-dark"
         >
           쇼핑 계속하기
         </Link>

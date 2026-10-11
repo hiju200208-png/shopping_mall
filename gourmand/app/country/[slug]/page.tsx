@@ -1,18 +1,18 @@
 import { Suspense } from "react";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { products } from "@/data/products";
 
-import MainBanner from "@/components/MainBanner";
-import CountryMenu from "@/components/CountryMenu";
+import CountryTabs from "@/components/CountryTabs";
 import ProductCard from "@/components/ProductCard";
 
-const countries: Record<string, string> = {
-  japan: "일본",
-  taiwan: "대만",
-  china: "중국",
-  vietnam: "베트남",
-  other: "그 외",
+const countries: Record<string, { name: string; banner: string }> = {
+  japan: { name: "일본", banner: "/images/banner-japan.png" },
+  taiwan: { name: "대만", banner: "/images/banner-taiwan.png" },
+  china: { name: "중국", banner: "/images/banner-china.png" },
+  vietnam: { name: "베트남", banner: "/images/banner-vietnam.png" },
+  other: { name: "그 외", banner: "/images/banner-global.png" },
 };
 
 type CountryPageProps = {
@@ -26,37 +26,71 @@ export function generateStaticParams() {
   }));
 }
 
-// 주소를 읽고 국가별 상품을 표시하는 부분
-async function CountryProducts({ params }: CountryPageProps) {
+// 주소를 읽고 나라 배너 + 탭 + 상품 목록을 표시하는 부분
+async function CountryContent({ params }: CountryPageProps) {
   const { slug } = await params;
 
-  const countryName = countries[slug];
+  const country = countries[slug];
 
-  if (!countryName) {
+  if (!country) {
     notFound();
   }
 
-  const countryProducts = products.filter((p) => {
-    if (slug === "other") {
-      return !["일본", "대만", "중국", "베트남"].includes(
-        p.country
-      );
-    }
+  const countryProducts = products
+    .filter((p) => {
+      if (slug === "other") {
+        return !["일본", "대만", "중국", "베트남"].includes(p.country);
+      }
 
-    return p.country === countryName;
-  });
+      return p.country === country.name;
+    })
+    // 품절 상품은 뒤로
+    .sort(
+      (a, b) =>
+        Number(a.isSoldOut || a.stock === 0) -
+        Number(b.isSoldOut || b.stock === 0)
+    );
 
   return (
     <>
-      <h1 className="mb-6 text-2xl font-bold">
-        {countryName} 상품 ({countryProducts.length}개)
-      </h1>
+      {/* 1. 나라 전용 배너 */}
+      {/* 배너 속 '지금 둘러보기'를 누르면 상품 목록으로 이동 */}
+      <a
+        href="#products"
+        className="relative block aspect-[16/9] overflow-hidden rounded-2xl bg-brand-soft md:aspect-[3/1]"
+      >
+        <Image
+          src={country.banner}
+          alt={`${country.name} 과자 여행`}
+          fill
+          priority
+          sizes="(max-width: 1152px) 100vw, 1152px"
+          className="object-cover object-center"
+        />
+      </a>
 
-      <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-        {countryProducts.map((p) => (
-          <ProductCard key={p.id} p={p} />
-        ))}
+      {/* 2. 나라 전환 탭 */}
+      <div className="mt-5">
+        <CountryTabs active={slug} />
       </div>
+
+      {/* 3. 상품 목록 */}
+      <section id="products" className="mt-8 scroll-mt-24">
+        <div className="mb-6 flex items-baseline gap-2">
+          <h1 className="text-2xl font-bold text-gray-900">
+            {country.name} 간식
+          </h1>
+          <span className="text-sm text-gray-500">
+            {countryProducts.length}개의 상품
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
+          {countryProducts.map((p) => (
+            <ProductCard key={p.id} p={p} />
+          ))}
+        </div>
+      </section>
     </>
   );
 }
@@ -65,26 +99,13 @@ async function CountryProducts({ params }: CountryPageProps) {
 export default function CountryPage({ params }: CountryPageProps) {
   return (
     <main className="mx-auto max-w-6xl px-4 py-6 md:py-8">
-      {/* 1. 메인 자동 슬라이드 배너 */}
-      <MainBanner />
-
-      {/* 2. 나라별 바로가기 아이콘 */}
-      <section className="mt-6">
-        <CountryMenu />
-      </section>
-
-      {/* 3. 선택한 국가의 상품 목록 */}
-      <section className="mt-10">
-        <Suspense
-          fallback={
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              상품을 불러오는 중이에요…
-            </p>
-          }
-        >
-          <CountryProducts params={params} />
-        </Suspense>
-      </section>
+      <Suspense
+        fallback={
+          <p className="text-sm text-gray-500">상품을 불러오는 중이에요…</p>
+        }
+      >
+        <CountryContent params={params} />
+      </Suspense>
     </main>
   );
 }
