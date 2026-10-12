@@ -110,7 +110,7 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white">
+    <header data-shop-chrome className="sticky top-0 z-50 border-b border-gray-200 bg-white">
       {/* PC 헤더 */}
       <div className="mx-auto hidden h-20 max-w-6xl items-center gap-5 px-4 lg:flex xl:gap-8">
         {/* 로고 */}

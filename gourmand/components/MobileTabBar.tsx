@@ -50,7 +50,7 @@ export default function MobileTabBar() {
   ];
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-50 flex h-16 border-t border-gray-200 bg-white lg:hidden">
+    <nav data-shop-chrome className="fixed inset-x-0 bottom-0 z-50 flex h-16 border-t border-gray-200 bg-white lg:hidden">
       {tabs.map((tab) => {
         const isActive = pathname === tab.href; // 지금 페이지와 같은 탭이면 강조
         return (
