@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Product } from "@/types/product";
 import AddToCartButton from "@/components/AddToCartButton";
 
-export default function ProductCard({ p }: { p: Product }) {
+// showCountry: 여러 나라 상품이 섞인 목록(카테고리 페이지)에서 나라 표시
+export default function ProductCard({ p, showCountry = false }: { p: Product; showCountry?: boolean }) {
   const salePrice = p.discountPrice;
   const discountRate =
     salePrice !== undefined && salePrice < p.price
@@ -32,11 +33,18 @@ export default function ProductCard({ p }: { p: Product }) {
               className="h-full w-full object-contain transition duration-300 group-hover:scale-105"
             />
 
-            {p.isNew && (
-              <span className="absolute left-2 top-2 rounded bg-brand px-2 py-0.5 text-[11px] font-bold text-white">
-                NEW
-              </span>
-            )}
+            <div className="absolute left-2 top-2 flex gap-1">
+              {showCountry && (
+                <span className="rounded bg-gray-100 px-1.5 py-0.5 text-[11px] font-bold text-gray-700">
+                  {p.country}
+                </span>
+              )}
+              {p.isNew && (
+                <span className="rounded bg-brand px-2 py-0.5 text-[11px] font-bold text-white">
+                  NEW
+                </span>
+              )}
+            </div>
 
             {soldOut && (
               <div className="absolute inset-0 flex items-center justify-center bg-white/70">

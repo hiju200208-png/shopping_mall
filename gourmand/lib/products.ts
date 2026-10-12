@@ -1,5 +1,6 @@
 import { products } from "@/data/products";
 import { Product } from "@/types/product";
+import { CATEGORIES, categoryOf } from "@/lib/categories";
 
 // ── 상품 상태 ──
 export const isSoldOut = (p: Product) => p.isSoldOut || p.stock === 0;
@@ -30,16 +31,8 @@ export const COUNTRY_FILTERS = [
 export const countrySlugOf = (p: Product) =>
   COUNTRY_FILTERS.find((c) => c.name === p.country)?.slug ?? "other";
 
-// ── 카테고리 (작은 분류는 묶어서 보여줌) ──
-export const CATEGORY_FILTERS = [
-  { slug: "snack", name: "과자", match: ["과자"] },
-  { slug: "candy", name: "젤리·캔디", match: ["젤리·캔디", "캔디"] },
-  { slug: "chocolate", name: "초콜릿", match: ["초콜릿"] },
-  { slug: "bakery", name: "베이커리", match: ["베이커리", "빵·케이크"] },
-  { slug: "etc", name: "그 외 간식", match: null }, // 위에 없는 나머지 전부
-];
-
-const knownCategories = CATEGORY_FILTERS.flatMap((c) => c.match ?? []);
+// ── 카테고리 (lib/categories.ts의 6가지 과자 분류) ──
+export const CATEGORY_FILTERS = CATEGORIES.map((c) => ({ slug: c.slug, name: c.name }));
 
 // ── 정렬 ──
 export const SORT_OPTIONS = [
@@ -73,18 +66,11 @@ export function findProducts({ q, country, category, sort }: ProductQuery) {
       }
     }
 
-    if (category) {
-      const group = CATEGORY_FILTERS.find((c) => c.slug === category);
-      if (group?.match) {
-        if (!group.match.includes(p.category)) return false;
-      } else if (group && knownCategories.includes(p.category)) {
-        return false;
-      }
-    }
+    if (category && categoryOf(p.id)?.slug !== category) return false;
 
     if (keyword) {
       const haystack = normalize(
-        [p.name, p.country, p.category, p.manufacturer, p.foodType, p.description].join(" ")
+        [p.name, p.country, p.category, categoryOf(p.id)?.name ?? "", p.manufacturer, p.foodType, p.description].join(" ")
       );
       if (!haystack.includes(keyword)) return false;
     }
