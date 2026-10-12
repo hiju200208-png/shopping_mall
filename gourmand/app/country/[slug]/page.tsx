@@ -6,6 +6,7 @@ import { products } from "@/data/products";
 
 import CountryTabs from "@/components/CountryTabs";
 import ProductCard from "@/components/ProductCard";
+import CategoryFilter, { filterByCategory } from "@/components/CategoryFilter";
 
 const countries: Record<string, { name: string; banner: string }> = {
   japan: { name: "일본", banner: "/images/banner-japan.png" },
@@ -17,6 +18,7 @@ const countries: Record<string, { name: string; banner: string }> = {
 
 type CountryPageProps = {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ category?: string }>;
 };
 
 // 국가 주소를 미리 지정
@@ -27,8 +29,9 @@ export function generateStaticParams() {
 }
 
 // 주소를 읽고 나라 배너 + 탭 + 상품 목록을 표시하는 부분
-async function CountryContent({ params }: CountryPageProps) {
+async function CountryContent({ params, searchParams }: CountryPageProps) {
   const { slug } = await params;
+  const { category } = await searchParams;
 
   const country = countries[slug];
 
@@ -50,6 +53,9 @@ async function CountryContent({ params }: CountryPageProps) {
         Number(a.isSoldOut || a.stock === 0) -
         Number(b.isSoldOut || b.stock === 0)
     );
+
+  // 과자 종류로 거르기 (?category=snack)
+  const shown = filterByCategory(countryProducts, category);
 
   return (
     <>
@@ -81,12 +87,16 @@ async function CountryContent({ params }: CountryPageProps) {
             {country.name} 간식
           </h1>
           <span className="text-sm text-gray-500">
-            {countryProducts.length}개의 상품
+            {shown.length}개의 상품
           </span>
         </div>
 
+        <div className="mb-6">
+          <CategoryFilter base={`/country/${slug}`} items={countryProducts} active={category} />
+        </div>
+
         <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-          {countryProducts.map((p) => (
+          {shown.map((p) => (
             <ProductCard key={p.id} p={p} />
           ))}
         </div>
@@ -96,7 +106,7 @@ async function CountryContent({ params }: CountryPageProps) {
 }
 
 // 페이지 전체 배치
-export default function CountryPage({ params }: CountryPageProps) {
+export default function CountryPage({ params, searchParams }: CountryPageProps) {
   return (
     <main className="mx-auto max-w-6xl px-4 py-6 md:py-8">
       <Suspense
@@ -104,7 +114,7 @@ export default function CountryPage({ params }: CountryPageProps) {
           <p className="text-sm text-gray-500">상품을 불러오는 중이에요…</p>
         }
       >
-        <CountryContent params={params} />
+        <CountryContent params={params} searchParams={searchParams} />
       </Suspense>
     </main>
   );
