@@ -29,6 +29,12 @@ const banners = [
     image: "/images/common/banner_gang.png",
     href: "/pick/gang",
   },
+  {
+    id: 5,
+    country: "지아 PICK",
+    image: "/images/common/banner_jina.png",
+    href: "/pick/jia",
+  },
 ];
 
 export default function MainBanner() {
@@ -108,7 +114,7 @@ export default function MainBanner() {
       </div>
 
       {/* 배너 아래 탭: 그림을 가리지 않고, 진행 막대로 넘어갈 시간을 표시 */}
-      <div className="mt-3 hidden grid-cols-4 gap-2 sm:grid">
+      <div className="mt-3 hidden grid-cols-5 gap-2 sm:grid">
         {banners.map((banner, index) => {
           const isActive = currentIndex === index;
           return (

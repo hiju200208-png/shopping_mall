@@ -27,11 +27,18 @@ async function PickProducts({
     <>
       <h1 className="mb-6 text-2xl font-bold">{pick.title}</h1>
 
-      <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-        {pickProducts.map((p) => (
-          <ProductCard key={p.id} p={p} />
-        ))}
-      </div>
+      {pickProducts.length === 0 ? (
+        // 아직 고른 상품이 없을 때
+        <p className="rounded-xl border border-gray-200 py-16 text-center text-gray-500">
+          추천 상품을 고르는 중이에요. 곧 채워질 예정이에요!
+        </p>
+      ) : (
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
+          {pickProducts.map((p) => (
+            <ProductCard key={p.id} p={p} />
+          ))}
+        </div>
+      )}
     </>
   );
 }
