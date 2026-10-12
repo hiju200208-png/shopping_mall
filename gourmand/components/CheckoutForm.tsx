@@ -13,13 +13,26 @@ import {
 
 type Errors = Partial<Record<keyof OrderInput, string>>;
 
-const INITIAL: OrderInput = {
+// 시연용 미리 채워 둔 배송 정보 (시연이 끝나면 DEMO_PREFILL을 false로 바꾸면 빈칸으로 돌아가요)
+const DEMO_PREFILL = true;
+
+const DEMO_SHIPPING: OrderInput = {
+  buyerName: "윤강",
+  phone: "010-1223-4545",
+  zipcode: "06236",
+  address1: "서울특별시 강남구 테헤란로 123",
+  address2: "구르망빌딩 3층",
+};
+
+const EMPTY: OrderInput = {
   buyerName: "",
   phone: "",
   zipcode: "",
   address1: "",
   address2: "",
 };
+
+const INITIAL: OrderInput = DEMO_PREFILL ? DEMO_SHIPPING : EMPTY;
 
 function validate(form: OrderInput): Errors {
   const errors: Errors = {};

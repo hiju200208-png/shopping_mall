@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import { usePathname } from "next/navigation";
 import CartBadge from "@/components/CartBadge";
 
@@ -31,8 +31,8 @@ function SearchIcon() {
   );
 }
 
-// PC와 모바일에서 사용하는 검색창
-function SearchBox({ autoFocus = false }: { autoFocus?: boolean }) {
+// PC 헤더 검색창 (모바일은 하단 '검색' 탭 사용)
+function SearchBox() {
   return (
     <form
       action="/products"
@@ -43,7 +43,6 @@ function SearchBox({ autoFocus = false }: { autoFocus?: boolean }) {
         type="search"
         name="q"
         aria-label="간식 검색"
-        autoFocus={autoFocus}
         placeholder="어떤 간식을 찾으세요?"
         className="min-w-0 flex-1 bg-transparent text-[15px] text-gray-900 outline-none placeholder:text-slate-500"
       />
@@ -59,34 +58,21 @@ function SearchBox({ autoFocus = false }: { autoFocus?: boolean }) {
   );
 }
 
-// 나라 메뉴 링크 (PC 가로 메뉴 / 모바일 펼침 메뉴 공통)
-function CountryLinks({
-  current,
-  mobile = false,
-  onNavigate,
-}: {
-  current: string | null; // 지금 보고 있는 나라 slug (모르면 null)
-  mobile?: boolean;
-  onNavigate?: () => void;
-}) {
+// PC 나라 메뉴 링크
+function CountryLinks({ current }: { current: string | null }) {
+  // current: 지금 보고 있는 나라 slug (모르면 null)
   return (
     <>
       {countries.map((country) => {
         const active = current === country.slug;
-        const style = mobile
-          ? `block border-b border-gray-50 px-5 py-3 font-medium ${
-              active ? "bg-brand-soft font-bold text-brand" : "text-gray-700"
-            }`
-          : `border-b-2 py-1 text-[17px] font-semibold transition hover:text-brand ${
-              active ? "border-brand text-brand" : "border-transparent text-gray-700"
-            }`;
         return (
           <Link
             key={country.slug}
             href={`/country/${country.slug}`}
-            onClick={onNavigate}
             aria-current={active ? "page" : undefined}
-            className={style}
+            className={`border-b-2 py-1 text-[17px] font-semibold transition hover:text-brand ${
+              active ? "border-brand text-brand" : "border-transparent text-gray-700"
+            }`}
           >
             {country.name}
           </Link>
@@ -97,18 +83,15 @@ function CountryLinks({
 }
 
 // 현재 주소를 읽어서 강조 (주소는 접속 시점에만 알 수 있어 Suspense 안에서만 사용)
-function ActiveCountryLinks(props: { mobile?: boolean; onNavigate?: () => void }) {
+function ActiveCountryLinks() {
   const pathname = usePathname();
   const current = pathname.startsWith("/country/")
     ? pathname.split("/")[2]
     : null;
-  return <CountryLinks current={current} {...props} />;
+  return <CountryLinks current={current} />;
 }
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-
   return (
     <header data-shop-chrome className="sticky top-0 z-50 border-b border-gray-200 bg-white">
       {/* PC 헤더 */}
@@ -169,94 +152,16 @@ export default function Header() {
         </div>
       </div>
 
-      {/* 모바일 헤더 */}
-      <div className="relative flex h-14 items-center justify-between px-3 lg:hidden">
-        {/* 햄버거 메뉴 */}
-        <button
-          type="button"
-          aria-label={menuOpen ? "메뉴 닫기" : "메뉴 열기"}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="p-2 text-gray-800"
-        >
-          <svg
-            aria-hidden="true"
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
-
-        {/* 가운데 로고 */}
-        <Link
-          href="/"
-          className="absolute left-1/2 -translate-x-1/2"
-        >
+      {/* 모바일 헤더: 가운데 로고만 (메뉴·검색·장바구니는 하단 탭에서) */}
+      <div className="flex h-14 items-center justify-center px-3 lg:hidden">
+        <Link href="/">
           <img
             src="/images/common/logo.png"
             alt="구르망 GOURMAND"
             className="h-10 w-auto"
           />
         </Link>
-
-        {/* 검색 버튼 + 장바구니 */}
-        <div className="flex items-center">
-          <button
-            type="button"
-            aria-label={searchOpen ? "검색 닫기" : "검색 열기"}
-            aria-expanded={searchOpen}
-            onClick={() => setSearchOpen(!searchOpen)}
-            className="flex h-10 w-10 items-center justify-center text-gray-800"
-          >
-            <SearchIcon />
-          </button>
-
-          <Link
-            href="/cart"
-            aria-label="장바구니"
-            className="p-2"
-          >
-            <span className="relative block">
-              <img
-                src="/images/common/cart_icon.png"
-                alt=""
-                className="h-6 w-6"
-              />
-              <CartBadge />
-            </span>
-          </Link>
-        </div>
       </div>
-
-      {/* 모바일 검색창 */}
-      {searchOpen && (
-        <div className="border-t border-gray-100 px-3 py-3 lg:hidden">
-          <SearchBox autoFocus />
-        </div>
-      )}
-
-      {/* 모바일 국가별 메뉴 */}
-      {menuOpen && (
-        <nav
-          aria-label="국가별 상품"
-          className="border-t border-gray-100 lg:hidden"
-        >
-          <Suspense
-            fallback={
-              <CountryLinks current={null} mobile onNavigate={() => setMenuOpen(false)} />
-            }
-          >
-            <ActiveCountryLinks mobile onNavigate={() => setMenuOpen(false)} />
-          </Suspense>
-        </nav>
-      )}
     </header>
   );
 }
