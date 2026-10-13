@@ -190,13 +190,13 @@ npm run dev
 
 ## 4. 완성 화면
 
-### 메인 페이지
+### 메인 페이지 캡쳐
 
 | PC | 모바일 |
 |:---:|:---:|
 | <img src="docs/images/main-pc.png" width="560" alt="메인 페이지 PC"> | <img src="docs/images/main-mobile.png" width="260" alt="메인 페이지 모바일"> |
 
-### 상품 목록 페이지
+### 상품 목록 페이지 캡쳐
 
 | PC | 모바일 |
 |:---:|:---:|
@@ -210,7 +210,7 @@ npm run dev
 |:---:|:---:|
 | <img src="docs/images/country-pc.png" width="560" alt="일본 상품 페이지 PC"> | <img src="docs/images/country-mobile.png" width="260" alt="일본 상품 페이지 모바일"> |
 
-### 상품 상세 페이지
+### 상품 상세 페이지 캡쳐
 
 | PC | 모바일 |
 |:---:|:---:|
