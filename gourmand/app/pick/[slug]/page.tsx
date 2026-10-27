@@ -1,12 +1,13 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
-import { products } from "@/data/products";
+import { fetchProducts } from "@/lib/products";
 import { picks } from "@/data/picks";
 
 import CountryMenu from "@/components/CountryMenu";
 import ProductCard from "@/components/ProductCard";
 import CategoryFilter, { filterByCategory } from "@/components/CategoryFilter";
+import { ProductGridSkeleton } from "@/components/Skeletons";
 
 // params를 읽는 부분만 따로 분리 (Suspense 안에서 실행됨)
 async function PickProducts({
@@ -23,9 +24,9 @@ async function PickProducts({
   // 없는 주소(/pick/abc)는 404
   if (!pick) notFound();
 
-  const pickProducts = pick.productIds
-    .map((id) => products.find((p) => p.id === id))
-    .filter((p) => p !== undefined);
+  // 픽에 정한 순서 그대로 보여 줘요 (서버는 추천순으로 돌려줘서 다시 맞춰요)
+  const byId = new Map((await fetchProducts({ ids: pick.productIds })).items.map((p) => [p.id, p]));
+  const pickProducts = pick.productIds.map((id) => byId.get(id)).filter((p) => p !== undefined);
 
   // 과자 종류로 거르기 (?category=snack)
   const shown = filterByCategory(pickProducts, category);
@@ -75,7 +76,7 @@ export default function PickPage({
 
       {/* pick 상품 (params를 읽는 부분만 Suspense) */}
       <section className="mt-10">
-        <Suspense fallback={<p className="text-gray-500">불러오는 중...</p>}>
+        <Suspense fallback={<ProductGridSkeleton />}>
           <PickProducts params={params} searchParams={searchParams} />
         </Suspense>
       </section>
